@@ -8,25 +8,27 @@ const Dashboard = () => {
     try {
       const response = await axios.post('/api/attendance/mark');
       console.log(response.data);
+      fetchAttendance();
+      
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    const fetchAttendance = async () => {
-      try {
-       
-        const response = await axios.get('/api/attendance');
-        setAttendance(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchAttendance();
   }, []);
 
+  const fetchAttendance = async () => {
+    try {
+     
+      const response = await axios.get('/api/attendance');
+      setAttendance(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   return (
     <div>
       <button onClick={markAttendance}>Mark Attendance</button>
